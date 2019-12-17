@@ -1,0 +1,52 @@
+I WANT TO ПРОВЕРКА АДМИНИСТРАТИВНОЙ ПАНЕЛИ ПЛАГИНА
+
+I wait "3" 
+I grab text from "$extensionsPage::$paymentsPluginsOption" 
+I select option "$extensionsPage::$extensionTypeSelect"," $paymentMenuText" 
+I wait "3" 
+I can see "$paymentMenuText"," "#extension > fieldset > legend"" 
+I can see ""Compassplus""
+I cant see 'Compassplus hosted'
+I click(locator::last element(locator::last element(locator::contains '#extension > fieldset > div > table > tbody > tr'," 'Compassplus payment')))"
+I wait "1" 
+I grab from current url "" 
+I am on page "$uri" 
+I wait "2" 
+I see element '#input-merchant-id' 
+I see element '#textarea-root-cert' 
+I see element '#textarea-client-cert' 
+I see element '#input-secret-key' 
+I see element '#input-total' 
+I see element '#input-order-status' 
+I see element '#input-geo-zone' 
+I see element '#input-status' 
+I see element '#input-debug' 
+I am on page '/' 
+I click('#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child "1)' 
+I wait for text '1 item' 
+I click '#cart > button' 
+I wait for text 'Checkout' 
+I click('#cart > ul > li:nth-child(2) > div > p > a:nth-child "2)' 
+I wait for text 'Step 1' 
+I select option 'input[name=account]'," 'Guest Checkout' 
+I wait "1" 
+I click('#collapse-checkout-option > div > div > div:nth-child(1) > div:nth-child "4) > label' 
+I click 'Continue' 
+I wait "1" 
+I fill field '#input-payment-firstname'," 'Sergey' 
+I fill field '#input-payment-lastname'," 'Ivanov' 
+I fill field '#input-payment-email'," 'test@test.com' 
+I fill field '#input-payment-telephone'," '84951234567' 
+I fill field '#input-payment-address-1'," 'Address' 
+I fill field '#input-payment-city'," 'City' 
+I fill field '#input-payment-postcode'," '123456' 
+I select option '#input-payment-zone'," 'Aberdeen' 
+I wait "5" 
+I click '#button-guest' 
+I wait "1" 
+I click 'input[name=agree]' 
+I click '#button-payment-method' 
+I wait "1" 
+I don't see 'Warning: Payment method required!'," '#collapse-payment-method > div' 
+I wait "5"
+

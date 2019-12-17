@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class TvSubdivisionCode extends AbstractSearcher { public $haystack = [ 'FUN', 'NIT', 'NKF', 'NKL', 'NMA', 'NMG', 'NUI', 'VAI', ]; public $compareIdentical = true; } 

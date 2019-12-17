@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Stream; class InflateStream implements StreamInterface { use StreamDecoratorTrait; public function __construct(StreamInterface $stream) { $stream = new LimitStream($stream, -1, 10); $resource = GuzzleStreamWrapper::getResource($stream); stream_filter_append($resource, 'zlib.inflate', STREAM_FILTER_READ); $this->stream = new Stream($resource); } } 

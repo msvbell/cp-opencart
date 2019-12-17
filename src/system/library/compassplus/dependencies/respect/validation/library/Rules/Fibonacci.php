@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; class Fibonacci extends AbstractRule { public function validate($input) { if (!is_numeric($input)) { return false; } $sequence = [0, 1]; $position = 1; while ($input > $sequence[$position]) { ++$position; $sequence[$position] = $sequence[$position - 1] + $sequence[$position - 2]; } return $sequence[$position] === (int) $input; } } 

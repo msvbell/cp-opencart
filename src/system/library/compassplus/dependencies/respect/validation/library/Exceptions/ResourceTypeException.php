@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Exceptions; class ResourceTypeException extends ValidationException { public static $defaultTemplates = [ self::MODE_DEFAULT => [ self::STANDARD => '{{name}} must be a resource', ], self::MODE_NEGATIVE => [ self::STANDARD => '{{name}} must not be a resource', ], ]; } 

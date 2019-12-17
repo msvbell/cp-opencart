@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\Locale; use Respect\Validation\Rules\AbstractRule; class PlIdentityCard extends AbstractRule { public function validate($input) { if (!preg_match('/^[A-Z0-9]{9}$/', $input)) { return false; } $weights = [7, 3, 1, 0, 7, 3, 1, 7, 3]; $weightedSum = 0; for ($i = 0; $i < 9; ++$i) { $code = ord($input[$i]); if ($i < 3 && $code <= 57) { return false; } if ($i > 2 && $code >= 65) { return false; } $difference = $code <= 57 ? 48 : 55; $weightedSum += ($code - $difference) * $weights[$i]; } return $weightedSum % 10 == $input[3]; } } 

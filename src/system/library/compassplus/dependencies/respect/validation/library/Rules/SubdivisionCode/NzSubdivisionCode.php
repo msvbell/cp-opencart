@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class NzSubdivisionCode extends AbstractSearcher { public $haystack = [ 'N', 'S', 'AUK', 'BOP', 'CAN', 'CIT', 'GIS', 'HKB', 'MBH', 'MWT', 'NSN', 'NTL', 'OTA', 'STL', 'TAS', 'TKI', 'WGN', 'WKO', 'WTC', ]; public $compareIdentical = true; } 

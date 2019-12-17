@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; class Bsn extends AbstractRule { public function validate($input) { if (!ctype_digit($input)) { return false; } if (strlen($input) !== 9) { return false; } $sum = -1 * $input[8]; for ($i = 9; $i > 1; --$i) { $sum += $i * $input[9 - $i]; } return $sum !== 0 && $sum % 11 === 0; } } 

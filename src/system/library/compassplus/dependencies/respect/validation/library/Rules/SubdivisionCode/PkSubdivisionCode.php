@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class PkSubdivisionCode extends AbstractSearcher { public $haystack = [ 'BA', 'IS', 'JK', 'NA', 'NW', 'PB', 'SD', 'TA', ]; public $compareIdentical = true; } 

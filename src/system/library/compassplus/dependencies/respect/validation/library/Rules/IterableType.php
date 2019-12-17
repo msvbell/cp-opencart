@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; class IterableType extends AbstractRule { public function validate($input) { return is_array($input) || $input instanceof \stdClass || $input instanceof \Traversable; } } 

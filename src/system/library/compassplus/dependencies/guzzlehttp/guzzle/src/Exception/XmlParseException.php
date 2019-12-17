@@ -1,0 +1,2 @@
+<?php
+ namespace GuzzleHttp\Exception; use GuzzleHttp\Message\ResponseInterface; class XmlParseException extends ParseException { protected $error; public function __construct( $message = '', ResponseInterface $response = null, \Exception $previous = null, \LibXMLError $error = null ) { parent::__construct($message, $response, $previous); $this->error = $error; } public function getError() { return $this->error; } } 

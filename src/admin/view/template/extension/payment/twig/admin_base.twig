@@ -1,0 +1,31 @@
+{% set form_id = 'form-compassplus' %}
+{{ header }}
+{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+{#            Main buttons: save, cancel#}
+            <div class="pull-right">
+                {% block main_buttons %}
+                    <button type="submit" form="{{ form_id }}" class="btn btn-primary"><i class="fa fa-save"></i> {{ button_save }}</button>
+                    <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-reply"></i> {{ button_cancel }}</a>
+                {% endblock %}
+            </div>
+{#            Breadcrumbs#}
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</div>
+{{ footer }}

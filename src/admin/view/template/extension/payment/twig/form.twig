@@ -1,0 +1,4 @@
+{% import "macros.twig" as forms %}
+<form action="{{ action }}" method="post" enctype="multipart/form-data" id="{{ form_id }}" class="form-horizontal">
+    {{ forms.input("payment_compassplus_merchant_account_id", "input-merchant-id", {{ payment_compassplus_merchant_account_id }}, ) }}
+</form>

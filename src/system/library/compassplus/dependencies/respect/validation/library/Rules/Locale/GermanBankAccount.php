@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\Locale; use malkusch\bav\BAV; use Respect\Validation\Rules\AbstractRule; class GermanBankAccount extends AbstractRule { public $bank; public $bav; public function __construct($bank, BAV $bav = null) { if (null === $bav) { $bav = new BAV(); } $this->bav = $bav; $this->bank = $bank; } public function validate($input) { return $this->bav->isValidBankAccount($this->bank, $input); } } 

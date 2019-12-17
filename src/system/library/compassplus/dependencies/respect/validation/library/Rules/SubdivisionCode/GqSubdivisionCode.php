@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class GqSubdivisionCode extends AbstractSearcher { public $haystack = [ 'C', 'I', 'AN', 'BN', 'BS', 'CS', 'KN', 'LI', 'WN', ]; public $compareIdentical = true; } 

@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Message; interface ResponseInterface extends MessageInterface { public function getStatusCode(); public function setStatusCode($code); public function getReasonPhrase(); public function setReasonPhrase($phrase); public function getEffectiveUrl(); public function setEffectiveUrl($url); public function json(array $config = []); public function xml(array $config = []); } 

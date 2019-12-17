@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; use SplFileInfo; class Extension extends AbstractRule { public $extension; public function __construct($extension) { $this->extension = $extension; } public function validate($input) { if ($input instanceof SplFileInfo) { return ($input->getExtension() == $this->extension); } if (!is_string($input)) { return false; } return (pathinfo($input, PATHINFO_EXTENSION) == $this->extension); } } 

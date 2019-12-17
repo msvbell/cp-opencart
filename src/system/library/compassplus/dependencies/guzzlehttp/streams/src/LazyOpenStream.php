@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Stream; class LazyOpenStream implements StreamInterface { use StreamDecoratorTrait; private $filename; private $mode; public function __construct($filename, $mode) { $this->filename = $filename; $this->mode = $mode; } protected function createStream() { return Stream::factory(Utils::open($this->filename, $this->mode)); } } 

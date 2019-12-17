@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Exceptions; class MimetypeException extends ValidationException { public static $defaultTemplates = [ self::MODE_DEFAULT => [ self::STANDARD => '{{name}} must have {{mimetype}} mimetype', ], self::MODE_NEGATIVE => [ self::STANDARD => '{{name}} must not have {{mimetype}} mimetype', ], ]; } 

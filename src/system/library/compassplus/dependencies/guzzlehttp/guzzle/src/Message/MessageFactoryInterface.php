@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Message; use GuzzleHttp\Url; interface MessageFactoryInterface { public function createResponse( $statusCode, array $headers = [], $body = null, array $options = [] ); public function createRequest($method, $url, array $options = []); } 

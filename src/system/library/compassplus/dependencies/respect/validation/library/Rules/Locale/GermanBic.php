@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\Locale; use malkusch\bav\BAV; use Respect\Validation\Rules\AbstractRule; class GermanBic extends AbstractRule { public $bav; public function __construct(BAV $bav = null) { if (null === $bav) { $bav = new BAV(); } $this->bav = $bav; } public function validate($input) { return $this->bav->isValidBIC($input); } } 

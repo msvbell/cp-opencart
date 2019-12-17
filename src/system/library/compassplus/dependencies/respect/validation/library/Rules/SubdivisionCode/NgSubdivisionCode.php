@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class NgSubdivisionCode extends AbstractSearcher { public $haystack = [ 'AB', 'AD', 'AK', 'AN', 'BA', 'BE', 'BO', 'BY', 'CR', 'DE', 'EB', 'ED', 'EK', 'EN', 'FC', 'GO', 'IM', 'JI', 'KD', 'KE', 'KN', 'KO', 'KT', 'KW', 'LA', 'NA', 'NI', 'OG', 'ON', 'OS', 'OY', 'PL', 'RI', 'SO', 'TA', 'YO', 'ZA', ]; public $compareIdentical = true; } 

@@ -1,0 +1,6 @@
+.env
+.idea
+vendor
+public
+/tests/_output/
+bin

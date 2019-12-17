@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Event; interface EmitterInterface { public function on($eventName, callable $listener, $priority = 0); public function once($eventName, callable $listener, $priority = 0); public function removeListener($eventName, callable $listener); public function listeners($eventName = null); public function hasListeners($eventName); public function emit($eventName, EventInterface $event); public function attach(SubscriberInterface $subscriber); public function detach(SubscriberInterface $subscriber); } 

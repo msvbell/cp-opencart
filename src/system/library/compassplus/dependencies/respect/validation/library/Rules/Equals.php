@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; class Equals extends AbstractRule { public $compareTo; public function __construct($compareTo) { $this->compareTo = $compareTo; } public function validate($input) { return $input == $this->compareTo; } } 

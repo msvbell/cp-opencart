@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class CoSubdivisionCode extends AbstractSearcher { public $haystack = [ 'AMA', 'ANT', 'ARA', 'ATL', 'BOL', 'BOY', 'CAL', 'CAQ', 'CAS', 'CAU', 'CES', 'CHO', 'COR', 'CUN', 'DC', 'GUA', 'GUV', 'HUI', 'LAG', 'MAG', 'MET', 'NAR', 'NSA', 'PUT', 'QUI', 'RIS', 'SAN', 'SAP', 'SUC', 'TOL', 'VAC', 'VAU', 'VID', ]; public $compareIdentical = true; } 

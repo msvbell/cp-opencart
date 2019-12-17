@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; use Respect\Validation\Rules\Locale\Factory; class Bic extends AbstractWrapper { public function __construct($countryCode, Factory $factory = null) { if (null === $factory) { $factory = new Factory(); } $this->validatable = $factory->bic($countryCode); } } 

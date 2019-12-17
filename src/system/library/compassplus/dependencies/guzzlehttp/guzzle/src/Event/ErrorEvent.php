@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Event; use GuzzleHttp\Exception\RequestException; class ErrorEvent extends AbstractRetryableEvent { public function getException() { return $this->transaction->exception; } } 

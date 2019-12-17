@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Subscriber; use GuzzleHttp\Event\CompleteEvent; use GuzzleHttp\Event\RequestEvents; use GuzzleHttp\Event\SubscriberInterface; use GuzzleHttp\Exception\RequestException; class HttpError implements SubscriberInterface { public function getEvents() { return ['complete' => ['onComplete', RequestEvents::VERIFY_RESPONSE]]; } public function onComplete(CompleteEvent $event) { $code = (string) $event->getResponse()->getStatusCode(); if ($code[0] >= 4) { throw RequestException::create( $event->getRequest(), $event->getResponse() ); } } } 

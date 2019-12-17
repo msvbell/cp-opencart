@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Event; class AbstractRetryableEvent extends AbstractTransferEvent { public function retry($afterDelay = 0) { $this->transaction->state = 'retry'; if ($afterDelay) { $this->transaction->request->getConfig()->set('delay', $afterDelay); } $this->stopPropagation(); } } 

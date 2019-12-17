@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Event; use GuzzleHttp\Message\ResponseInterface; class BeforeEvent extends AbstractRequestEvent { public function intercept(ResponseInterface $response) { $this->transaction->response = $response; $this->transaction->exception = null; $this->stopPropagation(); } } 

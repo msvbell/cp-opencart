@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Exceptions\SubdivisionCode; use Respect\Validation\Exceptions\SubdivisionCodeException; class FmSubdivisionCodeException extends SubdivisionCodeException { public static $defaultTemplates = [ self::MODE_DEFAULT => [ self::STANDARD => '{{name}} must be a subdivision code of Micronesia', ], self::MODE_NEGATIVE => [ self::STANDARD => '{{name}} must not be a subdivision code of Micronesia', ], ]; } 

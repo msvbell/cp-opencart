@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Ring\Future; trait MagicFutureTrait { use BaseFutureTrait; public function __get($name) { if ($name !== '_value') { throw new \RuntimeException("Class has no {$name} property"); } return $this->_value = $this->wait(); } } 

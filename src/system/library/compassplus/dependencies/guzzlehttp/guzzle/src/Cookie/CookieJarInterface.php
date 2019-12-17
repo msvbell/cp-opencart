@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Cookie; use GuzzleHttp\Message\RequestInterface; use GuzzleHttp\Message\ResponseInterface; interface CookieJarInterface extends \Countable, \IteratorAggregate { public function addCookieHeader(RequestInterface $request); public function extractCookies( RequestInterface $request, ResponseInterface $response ); public function setCookie(SetCookie $cookie); public function clear($domain = null, $path = null, $name = null); public function clearSessionCookies(); } 

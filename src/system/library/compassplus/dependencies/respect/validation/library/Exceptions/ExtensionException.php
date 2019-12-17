@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Exceptions; class ExtensionException extends ValidationException { public static $defaultTemplates = [ self::MODE_DEFAULT => [ self::STANDARD => '{{name}} must have {{extension}} extension', ], self::MODE_NEGATIVE => [ self::STANDARD => '{{name}} must not have {{extension}} extension', ], ]; } 

@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules; class FalseVal extends AbstractRule { public function validate($input) { if (false === $input) { return true; } return (false === filter_var($input, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)); } } 

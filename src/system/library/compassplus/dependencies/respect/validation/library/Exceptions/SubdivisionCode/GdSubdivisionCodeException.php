@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Exceptions\SubdivisionCode; use Respect\Validation\Exceptions\SubdivisionCodeException; class GdSubdivisionCodeException extends SubdivisionCodeException { public static $defaultTemplates = [ self::MODE_DEFAULT => [ self::STANDARD => '{{name}} must be a subdivision code of Grenada', ], self::MODE_NEGATIVE => [ self::STANDARD => '{{name}} must not be a subdivision code of Grenada', ], ]; } 

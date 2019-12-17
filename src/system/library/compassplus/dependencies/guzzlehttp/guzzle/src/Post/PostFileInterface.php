@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp\Post; use GuzzleHttp\Stream\StreamInterface; interface PostFileInterface { public function getName(); public function getFilename(); public function getContent(); public function getHeaders(); } 

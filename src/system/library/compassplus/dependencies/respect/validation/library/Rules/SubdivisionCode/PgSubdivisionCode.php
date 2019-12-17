@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class PgSubdivisionCode extends AbstractSearcher { public $haystack = [ 'CPK', 'CPM', 'EBR', 'EHG', 'EPW', 'ESW', 'GPK', 'MBA', 'MPL', 'MPM', 'MRL', 'NCD', 'NIK', 'NPP', 'NSA', 'SAN', 'SHM', 'WBK', 'WHM', 'WPD', ]; public $compareIdentical = true; } 

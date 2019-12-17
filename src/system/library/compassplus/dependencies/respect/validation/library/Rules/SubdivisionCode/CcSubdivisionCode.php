@@ -1,0 +1,2 @@
+<?php
+ namespace Respect\Validation\Rules\SubdivisionCode; use Respect\Validation\Rules\AbstractSearcher; class CcSubdivisionCode extends AbstractSearcher { public $haystack = [ 'D', 'H', 'O', 'S', 'W', ]; public $compareIdentical = true; } 

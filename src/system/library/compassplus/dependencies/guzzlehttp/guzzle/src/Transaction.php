@@ -1,0 +1,2 @@
+<?php
+namespace GuzzleHttp; use GuzzleHttp\Message\RequestInterface; use GuzzleHttp\Message\ResponseInterface; class Transaction { public $client; public $request; public $response; public $exception; public $transferInfo = []; public $retries = 0; public $state; public $future; public $_transitionCount = 0; public function __construct( ClientInterface $client, RequestInterface $request, $future = false ) { $this->client = $client; $this->request = $request; $this->_future = $future; } } 
