@@ -46,9 +46,9 @@ class ControllerExtensionPaymentCompassplus extends Controller
 
     public function callback()
     {
-        $this->load->language('extension/payment/compassplus_hosted');
+        $this->load->language('extension/payment/compassplus');
         $this->load->model('checkout/order');
-        $this->load->model('extension/payment/compassplus_hosted');
+        $this->load->model('extension/payment/compassplus');
 
         $response_data = $this->request->post;
 
@@ -60,8 +60,9 @@ class ControllerExtensionPaymentCompassplus extends Controller
         }
         $orderStatus = $orderInfo->getOrderStatus();
 
-        if (isset($this->session->data['order_id']) && $orderInfo->getOrderId() != '') {
-            $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+        $cpOrder = $this->model_extension_payment_compassplus->getOrderByCpId($orderInfo->getOrderId());
+        if ($cpOrder) {
+            $order_info = $this->model_checkout_order->getOrder($cpOrder['order_id']);
             // If APPROVED
             if ($orderStatus == 'APPROVED') {
                 $this->model_checkout_order->addOrderHistory($this->session->data['order_id'],

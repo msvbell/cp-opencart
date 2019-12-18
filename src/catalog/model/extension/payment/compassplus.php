@@ -67,6 +67,17 @@ class ModelExtensionPaymentCompassplus extends Model
         return $response;
     }
 
+    public function getOrderByCpId($id)
+    {
+        $order_data = $this->db->query("SELECT * FROM `" . DB_PREFIX . "compassplus_order_id` WHERE `order_id`=" . (int)$id);
+
+        if ($order_data->num_rows){
+            return $order_data->row;
+        }
+
+        return false;
+    }
+
     public function getMethod($address, $total)
     {
         $this->load->language('extension/payment/compassplus_hosted');
