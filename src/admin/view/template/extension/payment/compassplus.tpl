@@ -30,6 +30,20 @@
                       id="form-compassplus" class="form-horizontal">
                     <div class="form-group required">
                         <label class="col-sm-2 control-label"
+                               for="input-host"><?php echo $entry_host; ?></label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="compassplus_host"
+                                   value="<?php echo $compassplus_host; ?>"
+                                   placeholder="<?php echo $entry_host; ?>" id="input-host"
+                                   class="form-control"/>
+                            <?php if ($error_compassplus_host) { ?>
+                            <div class="text-danger"><?php echo $error_compassplus_host; ?></div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label"
                                for="input-merchant-id"><?php echo $entry_merchant_id; ?></label>
 
                         <div class="col-sm-10">
@@ -44,25 +58,11 @@
                     </div>
                     <div class="form-group required">
                         <label class="col-sm-2 control-label"
-                               for="textarea-root-cert"><?php echo $entry_root_cert; ?></label>
-
-                        <div class="col-sm-10">
-                            <textarea name="compassplus_root_cert"
-                                      placeholder="<?php echo $entry_root_cert; ?>" id="textarea-root-cert"
-                                      class="form-control" rows="3"><?php echo $compassplus_root_cert; ?></textarea>
-                            <?php if ($error_root_cert) { ?>
-                            <div class="text-danger"><?php echo $error_root_cert; ?></div>
-                            <?php } ?>
-                        </div>
-                    </div>
-{*                    client cert*}
-                    <div class="form-group required">
-                        <label class="col-sm-2 control-label"
                                for="textarea-client-cert"><?php echo $entry_client_cert; ?></label>
 
                         <div class="col-sm-10">
                             <textarea name="compassplus_client_cert"
-                                      placeholder="<?php echo $entry_root_cert; ?>" id="textarea-client-cert"
+                                      placeholder="<?php echo $entry_client_cert; ?>" id="textarea-client-cert"
                                       class="form-control" rows="3"><?php echo $compassplus_client_cert; ?></textarea>
                             <?php if ($error_client_cert) { ?>
                             <div class="text-danger"><?php echo $error_client_cert; ?></div>
@@ -132,20 +132,6 @@
                         <div class="col-sm-10">
                             <select name="compassplus_status" id="input-status" class="form-control">
                                 <?php if ($compassplus_status) { ?>
-                                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                                <option value="0"><?php echo $text_disabled; ?></option>
-                                <?php } else { ?>
-                                <option value="1"><?php echo $text_enabled; ?></option>
-                                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-debug"><span data-toggle="tooltip" title="<?php echo $help_debug; ?>"><?php echo $entry_debug; ?></span></label>
-                        <div class="col-sm-10">
-                            <select name="compassplus_test" id="input-debug" class="form-control">
-                                <?php if ($compassplus_test) { ?>
                                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                                 <option value="0"><?php echo $text_disabled; ?></option>
                                 <?php } else { ?>

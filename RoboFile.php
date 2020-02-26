@@ -5,7 +5,7 @@
  * @see http://robo.li/
  */
 
-if (file_exists(__DIR__.'/.env')) {
+if (file_exists(__DIR__ . '/.env')) {
     \Dotenv\Dotenv::create(__DIR__)->load();
 
 }
@@ -36,24 +36,19 @@ class RoboFile extends \Robo\Tasks
                 $option = strtolower(substr($option, 3));
                 $this->opencart_config[$option] = $value;
             } elseif ($option === 'SERVER_PORT') {
-                $this->server_port = (int) $value;
+                $this->server_port = (int)$value;
             } elseif ($option === 'SERVER_URL') {
                 $this->server_url = $value;
             }
         }
-        $this->opencart_config['http_server']  = $this->server_url.':'.$this->server_port.'/';
+        $this->opencart_config['http_server'] = $this->server_url . ':' . $this->server_port . '/';
         $required = array('db_username', 'password', 'email');
         $missing = array();
         foreach ($required as $config) {
             if (empty($this->opencart_config[$config])) {
-                $missing[] = 'OC_'.strtoupper($config);
+                $missing[] = 'OC_' . strtoupper($config);
             }
         }
-//        if (!empty($missing)) {
-//            $this->say("<error> Missing ".implode(', ', $missing));
-//            $this->say("<error> See .env.sample ");
-//            die();
-//        }
     }
 
     function release()
@@ -66,6 +61,9 @@ class RoboFile extends \Robo\Tasks
         // TODO
     }
 
+    /**
+     * Запуск acceptance тестов в chrome
+     */
     function test()
     {
         $this->taskCodecept()
@@ -73,11 +71,14 @@ class RoboFile extends \Robo\Tasks
             ->run();
     }
 
-    function startup(){
+    /**
+     * Установка opencart и плагина на docker
+     */
+    function startup()
+    {
         $this->taskFilesystemStack()
             ->mirror("vendor/opencart/opencart/upload", "public")
             ->chmod('public', 0777, 0000, true)
-            ->mirror("vendor/skytech/payment-php-sdk", "public/system/library/skytech")
             ->run();
 
         // Create new database, drop if exists already
@@ -98,7 +99,6 @@ class RoboFile extends \Robo\Tasks
         $install->run();
         ob_end_clean();
 
-
         $localPath = __DIR__ . '/public';
         $localPath = str_replace("\\", "/", $localPath);
         $this->taskReplaceInFile('public/config.php')
@@ -115,6 +115,9 @@ class RoboFile extends \Robo\Tasks
         $this->projectDeploy();
     }
 
+    /**
+     * Копирование кода плагина на docker
+     */
     function projectDeploy()
     {
         $this->taskFileSystemStack()
@@ -122,6 +125,114 @@ class RoboFile extends \Robo\Tasks
             ->run();
     }
 
+    /**
+     * Добавляет в плагин sdk как библиотеку из dev ветки sdk
+     */
+    public function addsdk()
+    {
+        $collection = $this->collectionBuilder();
+        $tmpDir = $this->collectionBuilder()->tmpDir('tmp', __DIR__);
+        $tmpDir2 = $this->collectionBuilder()->tmpDir('tmp', __DIR__);
+
+        $this->say($tmpDir);
+
+        $collection->addTask(
+            $this->taskFilesystemStack()
+                ->mirror('vendor/skytech/payment-php-sdk', $tmpDir)
+        )->addTask(
+            $this->taskComposerInstall()
+                ->dir($tmpDir)
+                ->noDev()
+        );
+
+        $collection->run();
+
+        $files = \Symfony\Component\Finder\Finder::create()
+            ->ignoreVCS(true)
+            ->files()
+            ->notName('*.md')
+            ->notName('*.rst')
+            ->notName('composer.json')
+            ->notName('*.yml')
+            ->notName('*.dist')
+            ->notName('LICENSE')
+            ->notName('phpunit.xml')
+            ->notName('Makefile')
+            ->path('src')
+            ->path('vendor')
+            ->notPath('/vendor\/.*\/[Tt]est/')
+            ->notPath('/vendor\/.*\/[Dd]ocs/')
+            ->in($tmpDir);
+
+        $directories = \Symfony\Component\Finder\Finder::create()
+            ->ignoreVCS(true)
+            ->directories()
+            ->path('src')
+            ->path('vendor')
+            ->notPath('/vendor\/.*\/[Tt]est/')
+            ->notPath('/vendor\/.*\/[Dd]ocs/')
+            ->in($tmpDir);
+
+        $collection2 = $this->collectionBuilder();
+
+        foreach ($directories as $directory) {
+            $destDir = str_replace($tmpDir, $tmpDir2, $directory);
+            $collection2->addTask(
+                $this->taskFilesystemStack()->mkdir($destDir)
+            );
+        }
+
+        foreach ($files as $file) {
+            $destFile = str_replace($tmpDir, $tmpDir2, $file);
+            $collection2->addTask(
+                $this->taskExec('php')
+                    ->arg('-w')
+                    ->arg((string)$file)
+                    ->rawArg('>')
+                    ->arg($destFile)
+            );
+        }
+
+        $collection2->addTask(
+            $this->taskFilesystemStack()
+            ->mirror("$tmpDir2/src", 'src/system/library/compassplus/src')
+            ->mirror("$tmpDir2/vendor", 'src/system/library/compassplus/vendor')
+        );
+
+        $collection2->completion($this->taskDeleteDir([$tmpDir, $tmpDir2]));
+        $collection2->run();
+    }
+
+    /**
+     * Добавить файл корневых сертификатов.
+     * Нужен для ssl соединения с сервером TWPG
+     */
+    public function updatecacert()
+    {
+        $caFile = file_get_contents('https://curl.haxx.se/ca/cacert.pem');
+        $this->taskWriteToFile('src/system/library/compassplus/cacert.pem')->text($caFile)->run();
+    }
+
+    /**
+     *  Уменьшить размер sdk
+     *  Убирает комментарии и лишнии символы
+     *  В каждом файле исходный код будет в одну строчку
+     */
+    function compressDependencies()
+    {
+        $finder = \Symfony\Component\Finder\Finder::create()
+            ->path('src/system/library/compassplus')
+            ->name('*.php');
+
+        foreach ($finder as $file) {
+            $handle = fopen($file, 'wb+');
+            $contents = fread($handle, filesize($file));
+        }
+    }
+
+    /**
+     *  Следить за изменениями в папке src и composer.json и загружать изменения в docker
+     */
     function projectWatch()
     {
         $this->projectDeploy();

@@ -1,15 +1,2 @@
 <?php
-
-
-return array(
-    'format' => \Compassplus\Sdk\Config\Config::XML,
-    'testing' => true,
-    'PROD' => array(
-        'hostname' => 'mpi.compassplus.com',
-        'port' => '443'
-    ),
-    'TEST' => array(
-        'hostname' => '192.168.1.1',
-        'port' => '9009'
-    )
-);
+ use Compassplus\Sdk\Config\Config; return array( 'format' => Config::XML, 'testing' => false, 'PROD' => array( 'hostname' => 'mpi.superpayment.com', 'port' => '9009' ), 'TEST' => array( 'hostname' => '192.168.50.11', 'port' => '9009' ) ); 

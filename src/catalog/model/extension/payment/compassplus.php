@@ -1,5 +1,7 @@
 <?php
 
+require_once DIR_SYSTEM . 'library/compassplus/vendor/autoload.php';
+
 class ModelExtensionPaymentCompassplus extends Model
 {
 
@@ -15,7 +17,7 @@ class ModelExtensionPaymentCompassplus extends Model
 
         $order = new \Compassplus\Sdk\Order();
         $order->setAmount($this->currency->format($order_data['total'], $order_data['currency_code'], false, false));
-        $order->setCurrency(643); // TODO
+        $order->setCurrency(643);
 //        $order->setDescription("Test description");
         $order->setOrderId($order_data['order_id']);
 
@@ -27,7 +29,7 @@ class ModelExtensionPaymentCompassplus extends Model
         $merchant->setDeclineUrl($this->url->link('extension/payment/compassplus/callback', '', true));
 
         $address = new \Compassplus\Sdk\Customer\Address();
-        $address->setCountry(840); // TODO
+        $address->setCountry(840);
 //        $address->setRegion("Moscow");
 //        $address->setCity("Moscow");
 //        $address->setAddressline("evergreen street");
@@ -38,9 +40,12 @@ class ModelExtensionPaymentCompassplus extends Model
         $customer->setPhone($order_data['telephone']);
         $customer->setIp($order_data['ip']);
 
-        $connector = new \Compassplus\Sdk\Connector();
+        $host = $this->config->get('compassplus_host');
+        $connector = new \Compassplus\Sdk\Connector($host);
+
         try {
             $connector->setCert(DIR_SYSTEM . '/library/compassplus/compassplus.pem', '');
+
         } catch (Exception $e) {
             $this->log->write('Key error: ' . $e->getMessage());
         }
@@ -80,13 +85,13 @@ class ModelExtensionPaymentCompassplus extends Model
 
     public function getMethod($address, $total)
     {
-        $this->load->language('extension/payment/compassplus_hosted');
+        $this->load->language('extension/payment/compassplus');
 
-        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE geo_zone_id = '" . (int)$this->config->get('payment_compassplus_hosted_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE geo_zone_id = '" . (int)$this->config->get('payment_compassplus_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 
-        if ($this->config->get('payment_compassplus_hosted_total') > 0 && $this->config->get('payment_compassplus_hosted_total') > $total) {
+        if ($this->config->get('payment_compassplus_total') > 0 && $this->config->get('payment_compassplus_total') > $total) {
             $status = false;
-        } elseif (!$this->config->get('payment_compassplus_hosted_geo_zone_id')) {
+        } elseif (!$this->config->get('payment_compassplus_geo_zone_id')) {
             $status = true;
         } elseif ($query->num_rows) {
             $status = true;
@@ -98,10 +103,10 @@ class ModelExtensionPaymentCompassplus extends Model
 
         if ($status) {
             $method_data = array(
-                'code' => 'compassplus_hosted',
+                'code' => 'compassplus',
                 'title' => $this->language->get('text_title'),
                 'terms' => '',
-                'sort_order' => $this->config->get('payment_compassplus_hosted_sort_order')
+                'sort_order' => $this->config->get('payment_compassplus_sort_order')
             );
         }
 

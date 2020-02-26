@@ -19,8 +19,6 @@ class Plugin extends \AcceptanceTester
         $extensionsPage = new ExtensionsPage($I);
         $extensionsPage->openPaymentPlugins();
 
-//        $I->canSee("Skytech"); // FIX тест не видит надпись
-//        $I->cantSee('Skytech hosted');  // FIX тест не правильно работает
         $uri = $I->grabFromCurrentUrl();
         $uri = str_replace('extension/extension', 'extension/payment/compassplus', $uri);
         $I->amOnPage($uri);

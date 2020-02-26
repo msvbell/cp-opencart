@@ -4,3 +4,4 @@ vendor
 public
 /tests/_output/
 bin
+!/src/system/library/compassplus/vendor/

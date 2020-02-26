@@ -2,7 +2,7 @@
 
 class ModelExtensionPaymentCompassplus extends Model
 {
-    const COMPASSPLUS_CA_CRT = 'CA.crt';
+    const CA_CRT = 'CA.crt';
     const COMPASSPLUS_PEM = 'compassplus.pem';
     const PATH_TO_COMPASSPLUS_CERTS = 'library/compassplus/';
 
@@ -22,16 +22,16 @@ class ModelExtensionPaymentCompassplus extends Model
     private function getCert($fileName)
     {
         list($fullPath, $info) = $this->getFileInfo($fileName);
-        if (!$info->isFile()) {
+        if ($info->isFile()) {
             return file_get_contents($fullPath);
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public function getRootCert()
     {
-        return $this->getCert(self::COMPASSPLUS_CA_CRT);
+        return $this->getCert(self::CA_CRT);
     }
 
     public function getClientCert()
@@ -46,7 +46,7 @@ class ModelExtensionPaymentCompassplus extends Model
 
     public function saveRootCertToFile($certString)
     {
-        $this->certToFile($certString, self::COMPASSPLUS_CA_CRT);
+        $this->certToFile($certString, self::CA_CRT);
     }
 
     /**

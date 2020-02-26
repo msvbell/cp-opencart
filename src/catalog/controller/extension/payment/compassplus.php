@@ -1,5 +1,7 @@
 <?php
 
+require_once DIR_SYSTEM . 'library/compassplus/vendor/autoload.php';
+
 class ControllerExtensionPaymentCompassplus extends Controller
 {
     private $logMessagePrefix = '[Compassplus]';

@@ -11,6 +11,7 @@ modules:
         url: "%SERVER_URL%:%SERVER_PORT%/"
         browser: chrome # 'chrome' or 'firefox'
         wait: 7
+        pageload_timeout: 2
         capabilities:
           - platform: 'Windows 10'
     - PhpBrowser:
