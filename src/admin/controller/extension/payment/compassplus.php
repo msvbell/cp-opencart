@@ -49,6 +49,14 @@ class ControllerExtensionPaymentCompassplus extends Controller
             }
         }
 
+        if (!empty($data['compassplus_host'])) {
+            $urlParse = parse_url($data['compassplus_host']);
+            $data['compassplus_host'] = sprintf("%s:%s", $urlParse['host'], $urlParse['port']);
+            if (!empty($urlParse['path'])) {
+                $data['compassplus_host'] .= $urlParse['path'];
+            }
+        }
+
         // Merchant ID
         if (isset($this->request->post['compassplus_merchant_account_id'])) {
             $data['compassplus_merchant_account_id'] = $this->request->post['compassplus_merchant_account_id'];
