@@ -35,9 +35,10 @@ class ModelExtensionPaymentCompassplus extends Model
 //        $address->setAddressline("evergreen street");
 //        $address->setZip("123123");
 
+        $phone = preg_replace("/\D/", '', $order_data['telephone']); // оставляем только цифры
         $customer = new \Compassplus\Sdk\Customer($address);
         $customer->setEmail($order_data['email']);
-        $customer->setPhone($order_data['telephone']);
+        $customer->setPhone($phone);
         $customer->setIp($order_data['ip']);
 
         $host = $this->config->get('compassplus_host');
