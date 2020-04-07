@@ -71,14 +71,27 @@
                     </div>
                     <div class="form-group required">
                         <label class="col-sm-2 control-label"
-                               for="input-secret-key"><?php echo $entry_secret_key; ?></label>
+                               for="textarea-secret-key"><?php echo $entry_secret_key; ?></label>
 
                         <div class="col-sm-10">
-                            <input type="text" name="compassplus_secret_key" value="<?php echo $compassplus_secret_key; ?>"
+                            <textarea name="compassplus_secret_key" rows="3"
                                    placeholder="<?php echo $entry_secret_key; ?>" id="input-secret-key"
-                                   class="form-control"/>
+                                      class="form-control"><?php echo $compassplus_secret_key; ?></textarea>
                             <?php if ($error_secret_key) { ?>
                             <div class="text-danger"><?php echo $error_secret_key; ?></div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="input-secret-key-passphrase"><?php echo $entry_secret_key_passphrase; ?></label>
+
+                        <div class="col-sm-10">
+                            <input type="password" name="compassplus_secret_key_passphrase" value="<?php echo $compassplus_secret_key_passphrase; ?>"
+                                   placeholder="<?php echo $entry_secret_key_passphrase; ?>" id="input-secret-key-passphrase"
+                                   class="form-control"/>
+                            <?php if ($error_secret_key_passphrase) { ?>
+                            <div class="text-danger"><?php echo $error_secret_key_passphrase; ?></div>
                             <?php } ?>
                         </div>
                     </div>

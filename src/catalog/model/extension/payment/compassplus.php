@@ -45,8 +45,14 @@ class ModelExtensionPaymentCompassplus extends Model
         $connector = new \Compassplus\Sdk\Connector($host);
 
         try {
-            $connector->setCert(DIR_SYSTEM . '/library/compassplus/compassplus.pem', '');
-
+            $connector->setCert(DIR_SYSTEM . '/library/compassplus/compassplus.crt');
+            $kp = $this->config->get('compassplus_secret_key_passphrase');
+            $keyPath = DIR_SYSTEM . '/library/compassplus/compassplus.key';
+            if (empty($kp)) {
+                $connector->setKey($keyPath);
+            } else {
+                $connector->setKey($keyPath, $kp);
+            }
         } catch (Exception $e) {
             $this->log->write('Key error: ' . $e->getMessage());
         }

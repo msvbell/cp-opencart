@@ -28,7 +28,7 @@ class ControllerExtensionPaymentCompassplus extends Controller
                 $this->error['error_client_cert'] = $this->language->get('error_client_cert');
             }
 
-            $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
+            $this->response->redirect($this->url->link('extension/extension', 'token='.$this->session->data['token'] . '&type=payment', true));
         }
 
         if (empty($clientCert)) {
@@ -84,6 +84,13 @@ class ControllerExtensionPaymentCompassplus extends Controller
             }
         }
 
+        // Secret key passphrase
+        if (isset($this->request->post['compassplus_secret_key_passphrase'])) {
+            $data['compassplus_secret_key_passphrase'] = $this->request->post['compassplus_secret_key_passphrase'];
+        } else {
+            $data['compassplus_secret_key_passphrase'] = $this->config->get('compassplus_secret_key_passphrase');
+        }
+
         // Total
         if (isset($this->request->post['compassplus_total'])) {
             $data['compassplus_total'] = $this->request->post['compassplus_total'];
@@ -121,6 +128,7 @@ class ControllerExtensionPaymentCompassplus extends Controller
         }
 
         $texts = [
+            'heading_title',
             'button_save',
             'button_cancel',
             'text_edit',
@@ -129,6 +137,7 @@ class ControllerExtensionPaymentCompassplus extends Controller
             'entry_host',
             'entry_merchant_id',
             'entry_secret_key',
+            'entry_secret_key_passphrase',
             'entry_geo_zone',
             'entry_total',
             'entry_order_status',
@@ -144,8 +153,6 @@ class ControllerExtensionPaymentCompassplus extends Controller
         foreach ($texts as $text) {
             $data[$text] = $this->language->get($text);
         }
-
-        $data['heading_title'] = 'Compassplus'; // TODO перенести в language
 
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
@@ -177,21 +184,27 @@ class ControllerExtensionPaymentCompassplus extends Controller
             $data['error_secret_key'] = '';
         }
 
+        if (isset($this->error['error_secret_key_passphrase'])) {
+            $data['error_secret_key_passphrase'] = $this->error['error_secret_key_passphrase'];
+        } else {
+            $data['error_secret_key_passphrase'] = '';
+        }
+
         $data['breadcrumbs'] = array();
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true)
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_extension'),
-            'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
+            'href' => $this->url->link('extension/extension', 'token='.$this->session->data['token'] . '&type=payment', true)
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('extension/payment/compassplus', 'token=' . $this->session->data['token'], true)
+            'href' => $this->url->link('extension/payment/compassplus', 'token='.$this->session->data['token'], true)
         );
 
         if (isset($this->request->post['compassplus_geo_zone_id'])) {
@@ -210,8 +223,8 @@ class ControllerExtensionPaymentCompassplus extends Controller
 
         $data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-        $data['action'] = $this->url->link('extension/payment/compassplus', 'token=' . $this->session->data['token'], true);
-        $data['cancel'] = $this->url->link('marketplace/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
+        $data['action'] = $this->url->link('extension/payment/compassplus', 'token='.$this->session->data['token'], true);
+        $data['cancel'] = $this->url->link('marketplace/extension', 'token='.$this->session->data['token'] . '&type=payment', true);
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');

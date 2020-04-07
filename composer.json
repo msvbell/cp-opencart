@@ -49,6 +49,9 @@
     "watch": [
       "Composer\\Config::disableProcessTimeout",
       "robo project:watch"
+    ],
+    "update": [
+      "robo addsdk"
     ]
   },
   "repositories": [{
