@@ -83,6 +83,19 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="input-secret-key-passphrase"><?php echo $entry_secret_key_passphrase; ?></label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="compassplus_secret_key_passphrase" value="<?php echo $compassplus_secret_key_passphrase; ?>"
+                                   placeholder="<?php echo $entry_secret_key_passphrase; ?>" id="input-secret-key-passphrase"
+                                   class="form-control"/>
+                            <?php if ($error_secret_key_passphrase) { ?>
+                            <div class="text-danger"><?php echo $error_secret_key_passphrase; ?></div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                       title="<?php echo $help_total; ?>"><?php echo $entry_total; ?></span></label>
 

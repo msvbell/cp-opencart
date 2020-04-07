@@ -12,7 +12,6 @@ class ControllerExtensionPaymentCompassplus extends Controller
      */
     public function index()
     {
-
         $this->load->language('extension/payment/compassplus');
         $this->load->model('checkout/order');
         $this->load->model('extension/payment/compassplus');
