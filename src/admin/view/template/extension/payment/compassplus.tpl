@@ -75,7 +75,7 @@
 
                         <div class="col-sm-10">
                             <textarea name="compassplus_secret_key" rows="3"
-                                   placeholder="<?php echo $entry_secret_key; ?>" id="input-secret-key"
+                                   placeholder="<?php echo $entry_secret_key; ?>" id="textarea-secret-key"
                                       class="form-control"><?php echo $compassplus_secret_key; ?></textarea>
                             <?php if ($error_secret_key) { ?>
                             <div class="text-danger"><?php echo $error_secret_key; ?></div>
