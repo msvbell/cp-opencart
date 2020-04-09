@@ -16,7 +16,8 @@ class Plugin
     public static $merchantIdField = '#input-merchant-id';
     public static $hostField = '#input-host';
     public static $clientCertTextarea = '#textarea-client-cert';
-    public static $secretKeyField = '#input-secret-key';
+    public static $secretKeyField = '#textarea-secret-key';
+    public static $secretKeyPassphraseField = '#input-secret-key-passphrase';
     public static $totalField = '#input-total';
     public static $orderStatusField = '#input-order-status';
     public static $geoZoneField = '#input-geo-zone';
@@ -26,7 +27,8 @@ class Plugin
     public static $hostLabel = 'label[for=input-host]';
     public static $merchantIdLabel = 'label[for=input-merchant-id]';
     public static $clientCertLabel = 'label[for=textarea-client-cert]';
-    public static $secretKeyLabel = 'label[for=input-secret-key]';
+    public static $secretKeyLabel = 'label[for=textarea-secret-key]';
+    public static $secretKeyPassphraseLabel = 'label[for=input-secret-key-passphrase]';
 
     /**
      * Basic route example for your current URL

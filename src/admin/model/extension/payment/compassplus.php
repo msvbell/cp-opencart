@@ -45,9 +45,9 @@ class ModelExtensionPaymentCompassplus extends Model
         $this->certToFile($certString, self::COMPASSPLUS_PEM);
     }
 
-    public function saveClientKey()
+    public function saveClientKey($keyString)
     {
-        $this->certToFile(self::COMPASSPLUS_KEY);
+        $this->certToFile($keyString, self::COMPASSPLUS_KEY);
     }
 
     public function getClientKey()

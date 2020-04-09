@@ -41,8 +41,19 @@ class ModelExtensionPaymentCompassplus extends Model
         $customer->setPhone($phone);
         $customer->setIp($order_data['ip']);
 
-        $host = $this->config->get('compassplus_host');
-        $connector = new \Compassplus\Sdk\Connector($host);
+        $url = $this->config->get('compassplus_host');
+        $host = parse_url($url, PHP_URL_HOST);
+        $port = parse_url($url, PHP_URL_PORT);
+        $path = parse_url($url, PHP_URL_PATH);
+
+        if (empty($port)) {
+            $port = null;
+        }
+        if (empty($path)) {
+            $path = '';
+        }
+
+        $connector = new \Compassplus\Sdk\Connector($host, $port, $path);
 
         try {
             $connector->setCert(DIR_SYSTEM . '/library/compassplus/compassplus.crt');
@@ -62,8 +73,6 @@ class ModelExtensionPaymentCompassplus extends Model
         } catch (Exception $e) {
             $this->log->write('Purchase error: ' . $e->getMessage());
         }
-        $this->log->write('Purchase data: ' . $response);
-
 
         if ($response->getStatus() == '00') {
             $this->db->query("INSERT INTO `" . DB_PREFIX . "compassplus_order` SET

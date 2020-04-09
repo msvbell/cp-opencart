@@ -19,11 +19,18 @@ class ControllerExtensionPaymentCompassplus extends Controller
 
         if (($this->request->server['REQUEST_METHOD'] === 'POST') && $this->validate()) {
             $this->model_setting_setting->editSetting('compassplus', $this->request->post);
-
             $this->session->data['success'] = $this->language->get('text_success');
+
             $clientCert = $this->request->post['compassplus_client_cert'];
             if (!empty($clientCert)) {
                 $this->model_extension_payment_compassplus->saveClientCertToFile($clientCert);
+            } else {
+                $this->error['error_client_cert'] = $this->language->get('error_client_cert');
+            }
+
+            $clientKey = $this->request->post['compassplus_secret_key'];
+            if (!empty($clientCert)) {
+                $this->model_extension_payment_compassplus->saveClientKey($clientKey);
             } else {
                 $this->error['error_client_cert'] = $this->language->get('error_client_cert');
             }
